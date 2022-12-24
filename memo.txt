@@ -1,4 +1,7 @@
 
+#In Mac
+brew install miniconda
+
 conda create -n django-rest python=3.8
 
 conda activate django-rest
