@@ -1,0 +1,14 @@
+
+conda create -n django-rest python=3.8
+
+conda activate django-rest
+
+pip3 install -r requirements.txt
+
+# init db
+python3 manage.py migrate 
+
+# Run server
+python3 manage.py runserver   
+
+conda deactivate
