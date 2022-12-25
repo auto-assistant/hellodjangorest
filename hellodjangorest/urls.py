@@ -23,6 +23,12 @@ from graphene_django.views import GraphQLView
 
 from .api import router
 from .schema import schema
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+from rest_framework_simplejwt.views import TokenVerifyView
+
 
 
 admin.autodiscover()
@@ -42,6 +48,15 @@ urlpatterns = [
 
     # other views still work too
     path('admin/', admin.site.urls),
+    path('api/', include('notes.urls')),
+    # path('auth/', include('rest_framework.urls')),
+    # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'), # 新添加
+    # path('api/refresh/', TokenRefreshView.as_view(), name='token_refresh'),      # 新添加
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+
+    path('api/jwtauth/', include('jwtauth.urls'), name='register'),
 ]
 
 if settings.DEPLOYMENT == 'dev':
